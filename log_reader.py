@@ -15,14 +15,20 @@ for file in os.listdir(log_location):
 		newest_file_time = int(condensed_timeStr)
 		newest_file = file
 
-thefile = open(log_location + newest_file)
+logFile = open(log_location + newest_file)
+outputFile = open('condensed_log.txt','w+')
 
-while True:
-	ret1 = thefile.read()
-	str = thefile.seek(0)
-	if str == None:
-		print('Hearthstone game not found.')
-		sys.exit()
-	ret2 = thefile.read()
-	if len(ret1) > 1 & str == 0:
-		print(ret1)
+try:
+	while True:
+		ret1 = logFile.read()
+		str = logFile.seek(0)
+		if str == None:
+			print('Hearthstone game not found.')
+			sys.exit()
+		ret2 = logFile.read()
+		if len(ret1) > 1 & str == 0:
+			outputFile.write(ret1)
+			print(ret1)
+except KeyboardInterrupt:
+	print('\nDone.')
+	sys.exit()
